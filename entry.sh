@@ -14,6 +14,7 @@ else
   mkdir -p $PROJECT_PATH
   cp -r $1 $PROJECT_PATH/$1
   cp -r src $PROJECT_PATH/src
+  cp -r .git $PROJECT_PATH/.git
   cp -r submodules $PROJECT_PATH/submodules
   cp -r test $PROJECT_PATH/test
   cp project.yml $PROJECT_PATH/project.yml
