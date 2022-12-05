@@ -11,6 +11,7 @@ RUN dpkg --add-architecture i386 && apt-get update && \
   rm -rf /var/lib/apt/lists/*
 
 RUN sudo apt-get update
+RUN sudo apt-get -y install git 
 RUN sudo apt-get -y install ruby -V 2.7.2
 RUN sudo gem install ceedling -v 0.31.1
 RUN sudo gem install dotenv -v 2.7.6
