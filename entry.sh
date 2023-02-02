@@ -23,6 +23,15 @@ fi
 
 ls $HARMONY_ROOT/apps
 
+echo "Docker Container Building $1:$2"
+
+set -x -e
+
+/opt/mplabx/mplab_platform/bin/prjMakefilesGenerator.sh $PROJECT_PATH/$1@$2 || exit 1
+make -C $PROJECT_PATH/$1 CONF=$2 build || exit 2
+
+cp -r $PROJECT_PATH/$1/ /github/workspace/output
+
 if [ "$4" = "true" ]
   then
     echo "Docker Container testing"
@@ -42,12 +51,3 @@ if [ "$4" = "true" ]
         rake options:SB4 test:all || { echo ">>> SB4 Unit test failed!!!"; exit 3; }
     fi
 fi
-
-echo "Docker Container Building $1:$2"
-
-set -x -e
-
-/opt/mplabx/mplab_platform/bin/prjMakefilesGenerator.sh $PROJECT_PATH/$1@$2 || exit 1
-make -C $PROJECT_PATH/$1 CONF=$2 build || exit 2
-
-cp -r $PROJECT_PATH/$1/ /github/workspace/output
