@@ -25,6 +25,8 @@ ls $HARMONY_ROOT/apps
 
 echo "Docker Container Building $1:$2"
 
+git status
+
 set -x -e
 
 /opt/mplabx/mplab_platform/bin/prjMakefilesGenerator.sh $PROJECT_PATH/$1@$2 || exit 1
