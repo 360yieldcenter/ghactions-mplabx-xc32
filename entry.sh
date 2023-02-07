@@ -1,47 +1,42 @@
 #!/bin/sh
 
-HARMONY_ROOT=/opt/harmony/v2_02_00b/
+WORKSPACE_PATH=/github/workspace
+
+HARMONY_ROOT=$WORKSPACE_PATH/harmony/v2_02_00b/
 COMPILER_ROOT=/opt/microchip/xc32/v2.50/
 MPLABX_ROOT=/opt/mplabx/
 
-PROJECT_PATH=./
 
-if [ -z "$3" ]
-  then
-    PROJECT_PATH=./
-else
-  PROJECT_PATH=$HARMONY_ROOT/apps/$3
-  mkdir -p $PROJECT_PATH
-  cp -r $1 $PROJECT_PATH/$1
-  cp -r src $PROJECT_PATH/src
-  cp -r .git $PROJECT_PATH/.git
-  cp -r submodules $PROJECT_PATH/submodules
-  cp -r test $PROJECT_PATH/test
-  cp project.yml $PROJECT_PATH/project.yml
-  cp rakefile.rb $PROJECT_PATH/rakefile.rb
-fi
+PROJECT_PATH=$HARMONY_ROOT/apps/$3
+/bin/sh
+cd $PROJECT_PATH
 
-ls $HARMONY_ROOT/apps
+FIRMWARE_PATH=$PROJECT_PATH/firmware
 
 echo "Docker Container Building $1:$2"
 
-git status
-
 set -x -e
 
-/opt/mplabx/mplab_platform/bin/prjMakefilesGenerator.sh $PROJECT_PATH/$1@$2 || exit 1
-make -C $PROJECT_PATH/$1 CONF=$2 build || exit 2
+echo $FIRMWARE_PATH/$1@$2
 
-cp -r $PROJECT_PATH/$1/ /github/workspace/output
+/opt/mplabx/mplab_platform/bin/prjMakefilesGenerator.sh -v -f $FIRMWARE_PATH/$1@$2
+
+git config --global --add safe.directory /github/workspace/harmony/v2_02_00b/apps/sb-firmware/firmware
+
+git -C $FIRMWARE_PATH diff
+
+make -C $FIRMWARE_PATH/$1 CONF=$2 build -j
+
+cp -r $FIRMWARE_PATH/$1/ /github/workspace/output
 
 if [ "$4" = "true" ]
   then
     echo "Docker Container testing"
-    cd $PROJECT_PATH
+    cd $FIRMWARE_PATH
     export HARMONY_ROOT
     export COMPILER_ROOT
     export MPLABX_ROOT
-    
+
     if [ $2 = "nsb_standalone" ]
       then
         rake options:SB3 test:all || { echo ">>> SB3 Unit test failed!!!"; exit 3; }

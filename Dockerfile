@@ -11,7 +11,7 @@ RUN dpkg --add-architecture i386 && apt-get update && \
   rm -rf /var/lib/apt/lists/*
 
 RUN sudo apt-get update
-RUN sudo apt-get -y install git 
+RUN sudo apt-get -y install git
 RUN sudo apt-get -y install ruby -V 2.7.2
 RUN sudo gem install ceedling -v 0.31.1
 RUN sudo gem install dotenv -v 2.7.6
@@ -24,7 +24,7 @@ RUN wget -nv -O /tmp/xc32 http://ww1.microchip.com/downloads/en/DeviceDoc/xc32-v
   rm /tmp/xc32
 RUN wget -nv -O /tmp/harmony http://ww1.microchip.com/downloads/en/DeviceDoc/harmony_v2_02_00b_linux_installer.run && \
   sudo chmod +x /tmp/harmony && \
-  /tmp/harmony --mode unattended --unattendedmodeui none --installdir /opt/harmony/v2_02_00b
+  /tmp/harmony --mode unattended --unattendedmodeui none --installdir /github/workspace/harmony/v2_02_00b
 RUN wget -nv -O /tmp/mplabx http://ww1.microchip.com/downloads/en/DeviceDoc/MPLABX-v5.45-linux-installer.tar &&\
   cd /tmp && tar -xf /tmp/mplabx && rm /tmp/mplabx && \
   mv MPLAB*-linux-installer.sh mplabx && \
