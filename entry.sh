@@ -8,7 +8,7 @@ MPLABX_ROOT=/opt/mplabx/
 
 
 PROJECT_PATH=$HARMONY_ROOT/apps/$3
-/bin/sh
+
 cd $PROJECT_PATH
 
 FIRMWARE_PATH=$PROJECT_PATH/firmware
@@ -23,6 +23,7 @@ echo $FIRMWARE_PATH/$1@$2
 
 git config --global --add safe.directory /github/workspace/harmony/v2_02_00b/apps/sb-firmware/firmware
 
+git -C $FIRMWARE_PATH status
 git -C $FIRMWARE_PATH diff
 
 make -C $FIRMWARE_PATH/$1 CONF=$2 build -j
