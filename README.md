@@ -28,7 +28,7 @@ Harmony apps folder if you want to build inside apps for references
 If you have Ceedling at the root level and you want to run tests
 
 
-### dockerImageTag
+### `dockerImageTag`
 
 The tag of soundboks/ghactions-mplabx-xc32 that you want to use - defaults to latest
 
