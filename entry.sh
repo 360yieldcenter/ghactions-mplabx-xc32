@@ -8,14 +8,13 @@ MPLABX_ROOT=/opt/microchip/mplabx/v5.45/
 
 
 PROJECT_PATH=$HARMONY_ROOT/apps/$3
+FIRMWARE_PATH=$PROJECT_PATH/firmware
 
 mkdir -p $PROJECT_PATH
 
 cp -R $WORKSPACE_PATH/firmware $PROJECT_PATH
 
-cd $PROJECT_PATH
-
-FIRMWARE_PATH=$PROJECT_PATH/firmware
+cd $FIRMWARE_PATH
 
 echo "Docker Container Building $1:$2"
 
@@ -23,16 +22,16 @@ set -x -e
 
 echo $FIRMWARE_PATH/$1@$2
 
-$MPLABX_ROOT/mplab_platform/bin/prjMakefilesGenerator.sh -v -f $FIRMWARE_PATH/$1@$2
+$MPLABX_ROOT/mplab_platform/bin/prjMakefilesGenerator.sh -v -f ./$1@$2
 
-git config --global --add safe.directory /github/workspace/harmony/v2_02_00b/apps/sb-firmware/firmware
+git config --global --add safe.directory $FIRMWARE_PATH
 
 git -C $FIRMWARE_PATH status
 git -C $FIRMWARE_PATH diff
 
-make -C $FIRMWARE_PATH/$1 CONF=$2 build -j
+make -C ./$1 CONF=$2 build -j
 
-cp -r $FIRMWARE_PATH/$1/ /github/workspace/output
+cp -r ./$1/ $WORKSPACE_PATH/output
 
 if [ "$4" = "true" ]
   then
