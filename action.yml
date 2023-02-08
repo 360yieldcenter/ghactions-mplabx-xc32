@@ -20,14 +20,10 @@ inputs:
     description: If you have Ceedling at the root level and you want to run tests
     required: false
     default: "false"
-  dockerImageTag:
-    description: The tag of soundboks/ghactions-mplabx-xc32 that you want to use - defaults to latest
-    required: false
-    default: "latest"
 
 runs:
   using: "docker"
-  image: docker://ghcr.io/soundboks/ghactions-mplabx-xc32:${{ inputs.dockerImageTag }}
+  image: docker://ghcr.io/soundboks/ghactions-mplabx-xc32:0.0.54
   args:
     - ${{ inputs.project }}
     - ${{ inputs.configuration }}
