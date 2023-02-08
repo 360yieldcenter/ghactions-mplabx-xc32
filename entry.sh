@@ -2,12 +2,16 @@
 
 WORKSPACE_PATH=/github/workspace
 
-HARMONY_ROOT=$WORKSPACE_PATH/harmony/v2_02_00b/
+HARMONY_ROOT=/opt/microchip/harmony/v2_02_00b/
 COMPILER_ROOT=/opt/microchip/xc32/v2.50/
-MPLABX_ROOT=/opt/mplabx/
+MPLABX_ROOT=/opt/microchip/mplabx/v5.45/
 
 
 PROJECT_PATH=$HARMONY_ROOT/apps/$3
+
+mkdir -p $PROJECT_PATH
+
+cp -R $WORKSPACE_PATH/firmware $PROJECT_PATH
 
 cd $PROJECT_PATH
 
@@ -19,7 +23,7 @@ set -x -e
 
 echo $FIRMWARE_PATH/$1@$2
 
-/opt/mplabx/mplab_platform/bin/prjMakefilesGenerator.sh -v -f $FIRMWARE_PATH/$1@$2
+$MPLABX_ROOT/mplab_platform/bin/prjMakefilesGenerator.sh -v -f $FIRMWARE_PATH/$1@$2
 
 git config --global --add safe.directory /github/workspace/harmony/v2_02_00b/apps/sb-firmware/firmware
 
