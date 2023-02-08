@@ -30,7 +30,7 @@ If you have Ceedling at the root level and you want to run tests
 
 ### `dockerImageTag`
 
-The tag of soundboks/ghactions-mplabx-xc32 that you want to use - defaults to latest
+The tag of `soundboks/ghactions-mplabx-xc32` that you want to use - defaults to latest
 
 ## Outputs
 
