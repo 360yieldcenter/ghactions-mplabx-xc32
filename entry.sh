@@ -12,7 +12,7 @@ FIRMWARE_PATH=$PROJECT_PATH/firmware
 
 mkdir -p $FIRMWARE_PATH
 
-cp -R $WORKSPACE_PATH/* $FIRMWARE_PATH
+cp -R $WORKSPACE_PATH/sb-firmware/. $FIRMWARE_PATH
 
 cd $FIRMWARE_PATH
 
@@ -22,12 +22,12 @@ set -x -e
 
 echo $FIRMWARE_PATH/$1@$2
 
-$MPLABX_ROOT/mplab_platform/bin/prjMakefilesGenerator.sh -v -f ./$1@$2
+$MPLABX_ROOT/mplab_platform/bin/prjMakefilesGenerator.sh -v -f $1@$2
 
 git config --global --add safe.directory $FIRMWARE_PATH
 
-git -C $FIRMWARE_PATH status
-git -C $FIRMWARE_PATH diff
+git status
+git diff
 
 make -C ./$1 CONF=$2 build -j
 
