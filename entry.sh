@@ -3,7 +3,7 @@
 WORKSPACE_PATH=/github/workspace
 
 HARMONY_ROOT=/opt/microchip/harmony/v2_02_00b/
-COMPILER_ROOT=/opt/microchip/xc32/v2.50/
+COMPILER_ROOT=/opt/microchip/xc32/v3.01/
 MPLABX_ROOT=/opt/microchip/mplabx/v5.45/
 
 
@@ -32,23 +32,3 @@ git diff
 make -C ./$1 CONF=$2 build -j
 
 cp -r ./$1/ $WORKSPACE_PATH/output
-
-if [ "$4" = "true" ]
-  then
-    echo "Docker Container testing"
-    cd $FIRMWARE_PATH
-    export HARMONY_ROOT
-    export COMPILER_ROOT
-    export MPLABX_ROOT
-
-    if [ $2 = "nsb_standalone" ]
-      then
-        rake options:SB3 test:all || { echo ">>> SB3 Unit test failed!!!"; exit 3; }
-    elif [ $2 = "sb75_standalone" ]
-      then
-        rake options:SB75 test:all || { echo ">>> SB75 Unit test failed!!!"; exit 3; }
-    elif [ $2 = "sherpa3_standalone" ]
-      then
-        rake options:SB4 test:all || { echo ">>> SB4 Unit test failed!!!"; exit 3; }
-    fi
-fi

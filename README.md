@@ -5,7 +5,7 @@ This action will build a MPLAB X project.
 It runs Ubuntu 20.04 and installs the following:
 
 - MPLAB 5.45
-- XC32 v2.50
+- XC32 v3.01
 - Harmony v2.02b
 - Ruby (2.7.2)
 
@@ -22,10 +22,6 @@ The configuration of the project to build. Defaults to `default`.
 ### `harmonyAppsFolder`
 
 Harmony apps folder if you want to build inside apps for references
-
-### `ceedling`
-
-If you have Ceedling at the root level and you want to run tests
 
 ## Outputs
 
@@ -46,16 +42,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download source
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
 
       - name: Build library
-        uses: SOUNDBOKS/ghactions-mplabx-xc32@master
+        uses: 360yieldcenter/ghactions-mplabx-xc32@master
         with:
           project: firmware.X
           configuration: default
           harmonyAppsFolder: some-firmware/firmware
-          ceedling: true
 ```
 
 ## Thanks to
-https://github.com/velocitek/ghactions-mplabx/blob/master/README.md
+https://github.com/SOUNDBOKS/ghactions-mplabx-xc32/blob/master/README.md

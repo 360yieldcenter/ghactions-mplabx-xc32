@@ -18,7 +18,7 @@ RUN sudo gem install dotenv -v 2.7.6
 
 # Unit test is now performed with gcc & no simulator, but the build still requires the XC32 & Harmony. MPLab should not be required though.
 
-RUN wget -nv -O /tmp/xc32 http://ww1.microchip.com/downloads/en/DeviceDoc/xc32-v2.50-full-install-linux-installer.run && \
+RUN wget -nv -O /tmp/xc32 http://ww1.microchip.com/downloads/en/DeviceDoc/xc32-v3.01-full-install-linux-installer.run && \
   sudo chmod +x /tmp/xc32 &&  \
   /tmp/xc32 --mode unattended --unattendedmodeui none --netservername localhost --LicenseType FreeMode --prefix /opt/microchip/xc32/v2.50 && \
   rm /tmp/xc32
