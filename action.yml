@@ -28,3 +28,4 @@ runs:
     - ${{ inputs.project }}
     - ${{ inputs.configuration }}
     - ${{ inputs.harmonyAppsFolder }}
+    - ${{ inputs.dfp }}

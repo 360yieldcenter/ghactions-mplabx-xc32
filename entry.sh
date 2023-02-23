@@ -22,12 +22,18 @@ set -x -e
 
 echo $FIRMWARE_PATH/$1@$2
 
+# if [ -z "$4" ]; then
 $MPLABX_ROOT/mplab_platform/bin/prjMakefilesGenerator.sh -v -f $1@$2
+#else
+#    $MPLABX_ROOT/mplab_platform/bin/prjMakefilesGenerator.sh -v -f $1@$2 -mdfp=$4
+# fi
 
 git config --global --add safe.directory $FIRMWARE_PATH
 
 git status
 git diff
+
+ls /
 
 make -C ./$1 CONF=$2 build -j
 
