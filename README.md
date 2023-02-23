@@ -4,7 +4,7 @@ This action will build a MPLAB X project.
 
 It runs Ubuntu 20.04 and installs the following:
 
-- MPLAB 5.45
+- MPLAB 6.00
 - XC32 v3.01
 - Harmony v2.02b
 - Ruby (2.7.2)
