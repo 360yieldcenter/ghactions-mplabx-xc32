@@ -31,6 +31,10 @@ RUN wget -nv -O /tmp/mplabx http://ww1.microchip.com/downloads/en/DeviceDoc/MPLA
   sudo ./mplabx --nox11 -- --unattendedmodeui none --mode unattended --ipe 0 --8bitmcu 0 --16bitmcu 0 --othermcu 0 --collectInfo 0 --installdir /opt/microchip/mplabx/v5.45 && \
   rm mplabx
 
+RUN wget -nv -O /tmp/mk_dfp.1.10.146.atpack https://packs.download.microchip.com/Microchip.PIC32MK-MC_DFP.1.10.146.atpack && \
+    mkdir -p ~/.mchp_packs/Microchip/PIC32MK-MC_DFP/1.10.146 && \
+    unzip /tmp/mk_dfp.1.10.146.atpack -d ~/.mchp_packs/Microchip/PIC32MK-MC_DFP/1.10.146
+
 COPY entry.sh /entry.sh
 
 RUN chmod +x /entry.sh

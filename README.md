@@ -23,6 +23,10 @@ The configuration of the project to build. Defaults to `default`.
 
 Harmony apps folder if you want to build inside apps for references
 
+### `dfp`
+
+Optional path to dfp to be used for compilation
+
 ## Outputs
 
 GH Outputs: None.
