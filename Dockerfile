@@ -22,14 +22,24 @@ RUN wget -nv -O /tmp/xc32 http://ww1.microchip.com/downloads/en/DeviceDoc/xc32-v
   sudo chmod +x /tmp/xc32 &&  \
   /tmp/xc32 --mode unattended --unattendedmodeui none --netservername localhost --LicenseType FreeMode --prefix /opt/microchip/xc32/v3.01 && \
   rm /tmp/xc32
+
+RUN wget -nv -O /tmp/xc32.tar https://ww1.microchip.com/downloads/aemDocuments/documents/DEV/ProductDocuments/SoftwareTools/xc32-v4.35-full-install-linux-x64-installer.tar && \
+  cd /tmp && tar -xf /tmp/xc32.tar && ls -la && mv xc32-v4.35-full-install-linux-x64-installer.run xc32 && \
+  sudo chmod +x /tmp/xc32 &&  \
+  /tmp/xc32 --mode unattended --unattendedmodeui none --netservername localhost --LicenseType FreeMode --prefix /opt/microchip/xc32/v4.35 && \
+  rm /tmp/xc32
+
 RUN wget -nv -O /tmp/harmony http://ww1.microchip.com/downloads/en/DeviceDoc/harmony_v2_02_00b_linux_installer.run && \
   sudo chmod +x /tmp/harmony && \
   /tmp/harmony --mode unattended --unattendedmodeui none --installdir /opt/microchip/harmony/v2_02_00b
+
 RUN wget -nv -O /tmp/mplabx http://ww1.microchip.com/downloads/en/DeviceDoc/MPLABX-v6.00-linux-installer.tar &&\
   cd /tmp && tar -xf /tmp/mplabx && rm /tmp/mplabx && \
   mv MPLAB*-linux-installer.sh mplabx && \
   sudo ./mplabx --nox11 -- --unattendedmodeui none --mode unattended --ipe 0 --8bitmcu 0 --16bitmcu 0 --othermcu 0 --collectInfo 0 --installdir /opt/microchip/mplabx/v5.45 && \
   rm mplabx
+
+
 
 RUN wget -nv -O /tmp/mk_dfp.1.10.146.atpack https://packs.download.microchip.com/Microchip.PIC32MK-MC_DFP.1.10.146.atpack && \
     mkdir -p ~/.mchp_packs/Microchip/PIC32MK-MC_DFP/1.10.146 && \
