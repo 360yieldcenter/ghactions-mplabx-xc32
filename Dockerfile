@@ -29,9 +29,9 @@ RUN wget -nv -O /tmp/xc32.tar https://ww1.microchip.com/downloads/aemDocuments/d
   /tmp/xc32 --mode unattended --unattendedmodeui none --netservername localhost --LicenseType FreeMode --prefix /opt/microchip/xc32/v4.35 && \
   rm /tmp/xc32 && rm /tmp/xc32.tar
 
-RUN wget -nv -O /tmp/harmony http://ww1.microchip.com/downloads/en/DeviceDoc/harmony_v2_02_00b_linux_installer.run && \
-  sudo chmod +x /tmp/harmony && \
-  /tmp/harmony --mode unattended --unattendedmodeui none --installdir /opt/microchip/harmony/v2_02_00b
+# RUN wget -nv -O /tmp/harmony http://ww1.microchip.com/downloads/en/DeviceDoc/harmony_v2_02_00b_linux_installer.run && \
+#   sudo chmod +x /tmp/harmony && \
+#   /tmp/harmony --mode unattended --unattendedmodeui none --installdir /opt/microchip/harmony/v2_02_00b
 
 RUN wget -nv -O /tmp/mplabx http://ww1.microchip.com/downloads/en/DeviceDoc/MPLABX-v6.00-linux-installer.tar &&\
   cd /tmp && tar -xf /tmp/mplabx && rm /tmp/mplabx && \
