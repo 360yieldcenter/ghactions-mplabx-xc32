@@ -27,7 +27,7 @@ RUN wget -nv -O /tmp/xc32.tar https://ww1.microchip.com/downloads/aemDocuments/d
   cd /tmp && tar -xf /tmp/xc32.tar && ls -la && mv xc32-v4.35-full-install-linux-x64-installer.run xc32 && \
   sudo chmod +x /tmp/xc32 &&  \
   /tmp/xc32 --mode unattended --unattendedmodeui none --netservername localhost --LicenseType FreeMode --prefix /opt/microchip/xc32/v4.35 && \
-  rm /tmp/xc32
+  rm /tmp/xc32 && rm /tmp/xc32.tar
 
 RUN wget -nv -O /tmp/harmony http://ww1.microchip.com/downloads/en/DeviceDoc/harmony_v2_02_00b_linux_installer.run && \
   sudo chmod +x /tmp/harmony && \
@@ -43,12 +43,14 @@ RUN wget -nv -O /tmp/mplabx http://ww1.microchip.com/downloads/en/DeviceDoc/MPLA
 
 RUN wget -nv -O /tmp/mk_dfp.1.10.146.atpack https://packs.download.microchip.com/Microchip.PIC32MK-MC_DFP.1.10.146.atpack && \
     mkdir -p ~/.mchp_packs/Microchip/PIC32MK-MC_DFP/1.10.146 && \
-    unzip /tmp/mk_dfp.1.10.146.atpack -d ~/.mchp_packs/Microchip/PIC32MK-MC_DFP/1.10.146
+    unzip /tmp/mk_dfp.1.10.146.atpack -d ~/.mchp_packs/Microchip/PIC32MK-MC_DFP/1.10.146 && \
+    rm -rf /tmp/mk_dfp.1.10.146.atpack
 
 # DFP for HCB
 RUN wget -nv -O /tmp/mk_dfp.1.11.151.atpack https://packs.download.microchip.com/Microchip.PIC32MK-MC_DFP.1.11.151.atpack && \
     mkdir -p ~/.mchp_packs/Microchip/PIC32MK-MC_DFP/1.11.151 && \
-    unzip /tmp/mk_dfp.1.11.151.atpack -d ~/.mchp_packs/Microchip/PIC32MK-MC_DFP/1.11.151
+    unzip /tmp/mk_dfp.1.11.151.atpack -d ~/.mchp_packs/Microchip/PIC32MK-MC_DFP/1.11.151 && \
+    rm -rf /tmp/mk_dfp.1.11.151.atpack
 
 COPY entry.sh /entry.sh
 
