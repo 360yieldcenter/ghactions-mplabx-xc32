@@ -2,19 +2,20 @@ FROM ubuntu:20.04
 
 ENV LANG C.UTF-8
 
-RUN pwd
+# RUN pwd
 
-RUN ls
+# RUN ls
 
 RUN dpkg --add-architecture i386 && apt-get update && \
-  apt-get install -y libc6:i386 libx11-6:i386 libxext6:i386 libstdc++6:i386 libexpat1:i386 wget sudo make && \
-  rm -rf /var/lib/apt/lists/*
+  apt-get install -y libc6:i386 libx11-6:i386 libxext6:i386 libstdc++6:i386 libexpat1:i386 wget sudo make git && \
+  rm -rf /var/lib/apt/lists/* && \
+  rm -rf /var/cache/apt/archives
 
-RUN sudo apt-get update
-RUN sudo apt-get -y install git
-RUN sudo apt-get -y install ruby -V 2.7.2
-RUN sudo gem install ceedling -v 0.31.1
-RUN sudo gem install dotenv -v 2.7.6
+# RUN sudo apt-get update
+# RUN sudo apt-get -y install git
+# RUN sudo apt-get -y install ruby -V 2.7.2
+# RUN sudo gem install ceedling -v 0.31.1
+# RUN sudo gem install dotenv -v 2.7.6
 
 # Unit test is now performed with gcc & no simulator, but the build still requires the XC32 & Harmony. MPLab should not be required though.
 
