@@ -16,6 +16,13 @@ RUN sudo apt-get -y install ruby -V 2.7.2
 RUN sudo gem install ceedling -v 0.31.1
 RUN sudo gem install dotenv -v 2.7.6
 
+# Workaround to provide additional free space for testing.
+#   https://github.com/actions/virtual-environments/issues/2840
+RUN sudo rm -rf /usr/share/dotnet && \ 
+    sudo rm -rf /opt/ghc && \
+    sudo rm -rf "/usr/local/share/boost" && \
+    sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+
 # Unit test is now performed with gcc & no simulator, but the build still requires the XC32 & Harmony. MPLab should not be required though.
 
 RUN wget -nv -O /tmp/xc32 http://ww1.microchip.com/downloads/en/DeviceDoc/xc32-v3.01-full-install-linux-installer.run && \
